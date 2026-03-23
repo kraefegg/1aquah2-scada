@@ -1,0 +1,35 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.10", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Run system tests (zero dependencies)
+      run: |
+        cd backend
+        python3 test_system.py
+
+    - name: Validate run.py imports cleanly
+      run: |
+        python3 -c "import run; print('run.py OK')"
+
+    - name: Validate HTML file exists
+      run: |
+        test -f aquah2_platform.html && echo "HTML OK"

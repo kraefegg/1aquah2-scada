@@ -1,0 +1,32 @@
+# AquaH2 AI-SCADA Platform — Backend Dependencies
+# Kraefegg M.O. · Developer: Railson
+
+# ── Core server (required) ────────────────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.0.0
+
+# ── WebSocket fallback (if FastAPI not available) ─────────────────────
+websockets>=12.0
+
+# ── Hardware integration (for production — swap simulator.py) ─────────
+# pymodbus>=3.6.0          # MODBUS TCP/RTU → PLCs
+# opcua>=0.98.0             # OPC-UA → Siemens S7, Beckhoff
+# pyserial>=3.5             # RS-485 serial for sensors
+# paho-mqtt>=1.6.1          # MQTT broker client
+# aiofiles>=23.0.0          # Async file serving
+
+# ── AI / ML (for production models) ──────────────────────────────────
+# scikit-learn>=1.4.0       # Anomaly detection, regression
+# numpy>=1.26.0             # Numeric processing
+# pandas>=2.0.0             # Time-series analysis
+
+# ── Database (production upgrade) ────────────────────────────────────
+# influxdb-client>=1.40.0   # InfluxDB v2 time-series
+# asyncpg>=0.29.0           # PostgreSQL / TimescaleDB async
+# redis>=5.0.0              # Real-time caching
+# SQLite is built into Python — no install needed for dev
+
+# ── Security ──────────────────────────────────────────────────────────
+# python-jose[cryptography]>=3.3.0   # JWT auth
+# passlib[bcrypt]>=1.7.4             # Password hashing
